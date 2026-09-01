@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-r+i2(y@yrapd)&^g0&zelflrn2&ibzdih_sj=bt$yg0+whxm1!"
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False") == "True"
@@ -146,7 +146,7 @@ MAILERS = {
         "BACKEND": "django.core.mail.backends.console.EmailBackend",
     },
 }
-
+CORS_ALLOW_ALL_ORIGINS = True
 ## once frontend is deployed to a url,
 # ##CORS_ALLOWED_ORIGINS = [
 ##    "https://your-frontend-url.com",]
