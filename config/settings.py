@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "authentication",
+    'maps',
+    'telemetry',
 ]
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -97,9 +99,13 @@ WSGI_APPLICATION = "config.wsgi.application"
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'idr_database',
+        'USER': 'postgres',
+        'PASSWORD': 'AAnn&&07', # Replace with your actual pgAdmin password
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -153,3 +159,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 ## once frontend is deployed to a url,
 # ##CORS_ALLOWED_ORIGINS = [
 ##    "https://your-frontend-url.com",]
+
+
+if os.name == 'nt':
+    GDAL_LIBRARY_PATH = r'C:\Users\Raghav Sharma\AppData\Local\Programs\OSGeo4W\bin\gdal313.dll'
+    GEOS_LIBRARY_PATH = r'C:\Users\Raghav Sharma\AppData\Local\Programs\OSGeo4W\bin\geos_c.dll'
