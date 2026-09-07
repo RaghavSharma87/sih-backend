@@ -100,12 +100,16 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'idr_database',
-        'USER': 'postgres',
-        'PASSWORD': 'AAnn&&07', # Replace with your actual pgAdmin password
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': os.environ.get('DB_ENGINE', 'django.contrib.gis.db.backends.postgis'),
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),  # No fallback here! It will error out if missing.
+        'PORT': os.environ.get('DB_PORT', '5432'),
+        'OPTIONS': {
+            'sslmode': 'require',
+            'channel_binding': 'require',
+        },
     }
 }
 
